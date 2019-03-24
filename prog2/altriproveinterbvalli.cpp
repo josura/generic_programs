@@ -23,36 +23,27 @@ int minimo(vector<int>& coso){
 	return mini;
 }
 
-void incremento(vector<int>& finali,vector<int>& possincrem,int distanzina){
+void incrementocheriesc(vector<int>& finali,vector<int>& possincrem,int distanzina){
 	for(unsigned i=0;i<finali.size()-1;i++){
-				if(finali[i]==finali[i+1]){
-					if(possincrem[i]>possincrem[i+1]){
-					 swap(possincrem[i],possincrem[i+1]);
-					 i=0;}
+		for(unsigned k=1;k<possincrem.size()-1;k++){
+				if(finali[k]==finali[k+1]){
+					if(possincrem[k]>possincrem[k+1]){
+						cout<<"scancio"<<possincrem[k]<<" ->"<<possincrem[k+1];
+					 swap(possincrem[k],possincrem[k+1]);
+					 k=0;}
 				}
-				else if(i>0 && finali[i-1]==finali[i]){
-					if(possincrem[i-1]>possincrem[i]){
-					 swap(possincrem[i-1],possincrem[i]);
-					 i=0;}
+				else if(finali[k-1]==finali[k]){
+					if(possincrem[k-1]>possincrem[k]){
+						cout<<"cancio "<<possincrem[k-1]<<" <-"<<possincrem[k];
+					 swap(possincrem[k-1],possincrem[k]);
+					 k=0;}
 				}	
-				if(finali[i]>finali[i+1]){
-					swap(finali[i],finali[i+1]);
-					swap(possincrem[i],possincrem[i+1]);
-					 i=0;
-				}	
-				else if(valoremax(finali[i],possincrem[i])>valoremax(finali[i+1],possincrem[i+1])+3 ){         //ciclo maledetto
-					if(i>0 && Distanza(finali[i-1],finali[i])>1){
-						swap(finali[i],finali[i+1]);
-						swap(possincrem[i],possincrem[i+1]);
-					//cout<<"risono dentro"<<finali[i]<<"->"<<possincrem[i]<<" to "<<finali[i+1]<<"->"<<possincrem[i+1];
-						int distanza=Distanza(finali[i],finali[i+1]),k=0;
-						while(k<distanza){
-							finali[i+1]+=1;
-							possincrem[i+1]--;
-							k++;
-						}
-					}
-		}		
+				if(finali[k]>finali[k+1]){
+					swap(finali[k],finali[k+1]);
+					swap(possincrem[k],possincrem[k+1]);
+					 k=0;
+				}
+		}
 		if(Distanza(finali[i],finali[i+1])<=distanzina){
 			if(i<finali.size()-2){
 				if(possincrem[i+1]>0 && possincrem[i+2]>0 && ( Distanza(finali[i],finali[i+1])<=Distanza(finali[i+1],finali[i+2]))){                 //&&  (Distanza(finali[i],finali[i+1])<Distanza(finali[i+1],finali[i+2]))    
@@ -67,10 +58,58 @@ void incremento(vector<int>& finali,vector<int>& possincrem,int distanzina){
 						if(possincrem[i-1]>possincrem[i]){
 					 	swap(possincrem[i-1],possincrem[i]);}
 					}
-					if(i>1) i+=-2;
 				}
 			}
 			else if(possincrem[i+1]>0)	{
+					finali[i+1]+=1;
+					possincrem[i+1]--;
+					if(finali[i-1]==finali[i]){
+						if(possincrem[i-1]>possincrem[i]){
+					 	swap(possincrem[i-1],possincrem[i]);}
+					}
+			}
+		}
+	}
+}
+
+void incremento(vector<int>& finali,vector<int>& possincrem,int distanzina){
+	for(unsigned i=0;i<finali.size()-1;i++){
+		if(valoremax(finali[i],possincrem[i])>valoremax(finali[i+1],possincrem[i+1])){
+					swap(finali[i],finali[i+1]);
+					swap(possincrem[i],possincrem[i+1]);
+					int distanza=Distanza(finali[i],finali[i+1]),k=0;
+					while(k<distanza){
+						finali[i]-=1;
+						possincrem[i]++;
+						k++;
+					}
+					k=0;
+					while(k<distanza){
+						finali[i+1]+=1;
+						possincrem[i+1]--;
+						k++;
+					}
+					i=0;
+					if(i>0) i+=-1;
+					else if(i>1)i+=-2;
+				}	
+		if(Distanza(finali[i],finali[i+1])<=distanzina){
+			if(i<finali.size()-2){
+				if(possincrem[i+1]>1 && possincrem[i+2]>1 && ( Distanza(finali[i],finali[i+1])<=Distanza(finali[i+1],finali[i+2]))){                 //&&  (Distanza(finali[i],finali[i+1])<Distanza(finali[i+1],finali[i+2]))    
+					finali[i+1]+=1;
+					possincrem[i+1]--;
+					if(finali[i+1]==finali[i+2]){
+						if(possincrem[i+1]>possincrem[i+2]){
+					 		swap(possincrem[i+1],possincrem[i+2]);
+						}
+					}
+					else if(i>=1 && finali[i-1]==finali[i]){
+						if(possincrem[i-1]>possincrem[i]){
+					 	swap(possincrem[i-1],possincrem[i]);}
+					}
+				}
+			}
+			else if(possincrem[i+1]>1)	{
 					finali[i+1]+=1;
 					possincrem[i+1]--;
 					if(finali[i-1]==finali[i]){
@@ -86,8 +125,8 @@ void incremento(vector<int>& finali,vector<int>& possincrem,int distanzina){
 int main(){
 	unsigned numele,iniz,fine;
 	int mindist,minicoso,mindo;
-	ifstream input("input.txt");
-	ofstream output("output.txt");
+	ifstream input("input (5).txt");
+	ofstream output("output (1).txt");
 	while(!input.eof()){
 		input>>numele;
 		vector<int> starts,finis,distanze,intervalli,stafin;
@@ -113,16 +152,7 @@ int main(){
 		for(unsigned i=0;i<numele-1;i++){
 			if(starts[i]==starts[i+1])
 				if(finis[i]>finis[i+1]) swap(finis[i],finis[i+1]);
-		}   	
-		/*unsigned min_idx;
-     	for (unsigned i = 0; i < starts.size()-1; i++){
-        min_idx = i;
-        for (unsigned j = i+1; j < starts.size(); j++)
-          if (starts[j] < starts[min_idx])
-            min_idx = j;
-	    swap(starts[min_idx], starts[i]);
-	    swap(finis[min_idx], finis[i]);
-    	}*/
+		} 
     	for(unsigned i=0;i<numele;i++){
 			stafin.push_back(starts[i]);
 		}
@@ -142,7 +172,7 @@ int main(){
 		mindist=minicoso=0;
 		cout<<mindo<<endl;
 		while(mindist<mindo && fine<100){
-			incremento(stafin,intervalli,mindist);
+			incrementocheriesc(stafin,intervalli,mindist);
 			mindist=minimo(stafin);
 			fine++;
 		}
