@@ -25,7 +25,7 @@ struct sockaddr_in self_addr;
 void parse_args_addr(int argc, char **argv,struct thread_data* datiRem) {
 	if(argc < 3){
 	    printf("Use: IP_dest PORT_dest");
-	    return 0;
+	    exit(1);
     }
     struct addrinfo * rp;
     char persona_ip[100];
