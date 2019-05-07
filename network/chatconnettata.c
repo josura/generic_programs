@@ -3,6 +3,7 @@
 #include<string.h>
 #include<sys/types.h>
 #include<sys/socket.h>
+#include<netdb.h>
 #include<netinet/in.h>
 #include<arpa/inet.h>
 #include<errno.h>
@@ -11,47 +12,38 @@
 
 #define SIZE 100
 
-struct addrinfo {
-    int              ai_flags;     // AI_PASSIVE, AI_CANONNAME, etc.
-    int              ai_family;    // AF_INET, AF_INET6, AF_UNSPEC
-    int              ai_socktype;  // SOCK_STREAM, SOCK_DGRAM
-    int              ai_protocol;  // use 0 for "any"
-    size_t           ai_addrlen;   // size of ai_addr in bytes
-    struct sockaddr *ai_addr;      // struct sockaddr_in or _in6
-    char            *ai_canonname; // full canonical hostname
-
-    struct addrinfo *ai_next;      // linked list, next node
+struct thread_data{
+    int socketfd;
+    struct sockaddr_in rem_addr;
 };
-int getaddrinfo(const char *node, const char *service,
-                       const struct addrinfo *hints,
-                       struct addrinfo **res);
-
 
 int netSock;
 struct addrinfo hints,*res;
 struct sockaddr_in persona;
 struct sockaddr_in self_addr;
 
-void parse_args_addr(int argc, char **argv) {
+void parse_args_addr(int argc, char **argv,struct thread_data* datiRem) {
 	if(argc < 3){
 	    printf("Use: IP_dest PORT_dest");
 	    return 0;
     }
-    addrinfo * rp;
+    struct addrinfo * rp;
     char persona_ip[100];
 	memcpy(persona_ip, argv[1], strlen(argv[1]));
-    memset(&hints,0,sizeof(hints));
+    bzero(&hints,sizeof(struct addrinfo));
     hints.ai_family=AF_INET;
     hints.ai_socktype=SOCK_STREAM;
-    getaddrinfo(argv[1],atoi(argv[2]),&hints,&res);
-    bzero( &persona,  sizeof(dest_addr));
-        persona.sin_family = AF_INET;
-        persona.sin_addr.s_addr = inet_addr(argv[1]);
-        persona.sin_port = htons(atoi(argv[2]));
-	
-    self_addr.sin_family = AF_INET; 
+    getaddrinfo(argv[1],argv[2],&hints,&res);
+    bzero( &persona,  sizeof(struct sockaddr_in));
+    bzero( &datiRem->rem_addr,  sizeof(persona));
+        datiRem->rem_addr.sin_family=persona.sin_family = AF_INET;
+        datiRem->rem_addr.sin_addr.s_addr=persona.sin_addr.s_addr = inet_addr(argv[1]);
+        datiRem->rem_addr.sin_port=persona.sin_port = htons(atoi(argv[2]));
+
+    self_addr.sin_family = AF_INET;
 	self_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	self_addr.sin_port = htons(atoi(argv[2]));
+    netSock=-1;
     for (rp = res; rp != NULL; rp = rp->ai_next) {
                netSock = socket(rp->ai_family, rp->ai_socktype,
                             rp->ai_protocol);
@@ -60,7 +52,6 @@ void parse_args_addr(int argc, char **argv) {
 
                if (connect(netSock, rp->ai_addr, rp->ai_addrlen) < 0)
                    break;                  /* Success */
-
                close(netSock);
            }
     if (rp == NULL) {               /* No address succeeded */
@@ -75,17 +66,15 @@ void errore(){
     printf("errore %s \n",strerror(errno));
 }
 
-void *ReceivingMessage(void *threadid)
- {
-    long tid;
+void *ReceivingMessage(void *threadid){
     struct thread_data* tid = (struct thread_data*)threadid;   //non li sto usando ma per usarli li posso passare in questo modo
     char buff[SIZE];
-    bzero();
+    bzero(buff,SIZE);
     while(1){
-        n = recv(netSock,buff,SIZE,0);
+        int n = recv(tid->socketfd,buff,SIZE-1,0);
         if(n==0) continue;
-        mesg[n] = 0;
-        printf("\nPid=%d: received from %s:%d \n the message: %s\n",getpid(),inet_ntoa(remote_addr.sin_addr), ntohs(remote_addr.sin_port), mesg );
+        buff[n] = 0;
+        printf("\nPid=%d: received from %s:%d \n the message: %s\n",getpid(),inet_ntoa(tid->rem_addr.sin_addr), ntohs(tid->rem_addr.sin_port), buff );
     }
     pthread_exit(NULL);
  }
@@ -93,41 +82,23 @@ void *ReceivingMessage(void *threadid)
 
 
 int main(int argc, char **argv){
-    parse_args_addr(argc,argv);	
-    int netSock,error;
-    struct sockaddr_in persona;
-    pthread_t thread;
-    struct thread_data* pdati;
     struct thread_data dati;
-    dati.boh=0;
-    dati.address=persona;
-    pdati=&dati;
-    netSock=socket(AF_INET,SOCK_STREAM,0);
-    if(netSock<0)
-	{
-		perror("Client Error: Socket not created succesfully");
-		return 0;
-	}
-    else{
-        printf("Socket succesfully created... \n");
-    }
-    // Binding newly created socket to given IP and verification 
-    if ((bind(netSock, (struct sockaddr*)&persona, sizeof(persona))) != 0) { 
-        printf("socket bind failed...\n"); 
-        exit(0); 
-    } 
-    else printf("Socket successfully binded..\n");
-    rc = pthread_create(&thread, NULL, ReceivingMessage(), (void *)pdati);
+    dati.socketfd=1;
+    parse_args_addr(argc,argv,&dati);
+    int error;
+    struct sockaddr_in persona;
+    pthread_t threadRec;
+    int rc=pthread_create(&threadRec, NULL, ReceivingMessage,&dati);
     if (rc){
         printf("ERROR; return code from pthread_create() is %d\n", rc);
+        errore();
         return 0;
     }
     char line[999];
     while (fgets(line,999,stdin) != NULL){
-        send(netSock,line,strlen(sendline),0);
-        printf("\nreceived from %s:%d the following: %s\n", 
-	    inet_ntoa(persona.sin_addr), ntohs(persona.sin_port), recvline );
+        send(netSock,line,strlen(line),0);
+        printf("\nsended to %s:%d the following: %s\n",
+	    inet_ntoa(persona.sin_addr), ntohs(persona.sin_port),line );
    }
     pthread_exit(NULL);
 }
-
