@@ -104,7 +104,7 @@ int main(int argc, char **argv){
     else
         printf("Server listening..\n");
     int len = sizeof(remot_addr);
-    dati.socketfd=accept(netSock,&remot_addr,len);
+    dati.socketfd=accept(netSock,(struct sockaddr*)(&remot_addr),&len);
     dati.rem_addr=remot_addr;
     int rc = pthread_create(&thread, NULL, ReceivingMessage, &dati);
     if (rc){
