@@ -60,7 +60,7 @@ void parse_args_addr(int argc, char **argv) {
                if (netSock == -1)
                    continue;
 
-               if (bind(netSock, rp->ai_addr, rp->ai_addrlen) < 0)
+               if (bind(netSock, rp->ai_addr, rp->ai_addrlen) == 0)
                    break;                  /* Success */
                close(netSock);
            }
