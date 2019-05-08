@@ -99,9 +99,10 @@ int main(int argc, char **argv){
     }
     char line[999];
     while (fgets(line,999,stdin) != NULL){
-        send(dati.socketfd,line,strlen(line),0);
-        printf("\nsended to %s:%d the following: %s\n",
-	    inet_ntoa(dati.rem_addr.sin_addr), ntohs(dati.rem_addr.sin_port),line );
+        printf("\t sended to %s:%d\n",
+	    inet_ntoa(dati.rem_addr.sin_addr), ntohs(dati.rem_addr.sin_port) );
+	send(dati.socketfd,line,strlen(line),0);
+        
    }
     pthread_exit(NULL);
 }
