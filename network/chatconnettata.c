@@ -45,14 +45,16 @@ void parse_args_addr(int argc, char **argv,struct thread_data* datiRem) {
 	self_addr.sin_port = htons(atoi(argv[2]));
     netSock=-1;
     for (rp = res; rp != NULL; rp = rp->ai_next) {
-               netSock = socket(rp->ai_family, rp->ai_socktype,
+               dati->socketfd=netSock = socket(rp->ai_family, rp->ai_socktype,
                             rp->ai_protocol);
                if (netSock == -1)
                    continue;
 
-               if (connect(netSock, rp->ai_addr, rp->ai_addrlen) < 0)
-                   break;                  /* Success */
-               close(netSock);
+               if (connect(netSock, rp->ai_addr, rp->ai_addrlen) < 0){
+                   	printf("connect succeded");
+		      break;                  /* Success */
+	       }
+               //close(netSock);
            }
     if (rp == NULL) {               /* No address succeeded */
                fprintf(stderr, "Could not connect\n");
@@ -74,6 +76,7 @@ void *ReceivingMessage(void *threadid){
         int n = recv(tid->socketfd,buff,SIZE-1,0);
         if(n==0) continue;
         buff[n] = 0;
+	 if(strlen(buff)==0)continue;
         printf("\nPid=%d: received from %s:%d \n the message: %s\n",getpid(),inet_ntoa(tid->rem_addr.sin_addr), ntohs(tid->rem_addr.sin_port), buff );
     }
     pthread_exit(NULL);
@@ -96,9 +99,9 @@ int main(int argc, char **argv){
     }
     char line[999];
     while (fgets(line,999,stdin) != NULL){
-        send(netSock,line,strlen(line),0);
+        send(dati.socketfd,line,strlen(line),0);
         printf("\nsended to %s:%d the following: %s\n",
-	    inet_ntoa(persona.sin_addr), ntohs(persona.sin_port),line );
+	    inet_ntoa(dati.rem_addr.sin_addr), ntohs(dati.rem_addr.sin_port),line );
    }
     pthread_exit(NULL);
 }
