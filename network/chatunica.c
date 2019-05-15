@@ -93,6 +93,7 @@ bool tryconnect(int argc, char **argv){
 
                 setsockopt(socketto,SOL_SOCKET,SO_RCVTIMEO,&tim,sizeof (tim));
                if (connect(socketto, rp->ai_addr, rp->ai_addrlen)< 0){
+		    freeaddrinfo(res);
                     return false;   //non è riuscito a connettere
 
                 } else {
@@ -110,10 +111,6 @@ bool tryconnect(int argc, char **argv){
 }
 
 bool trybind(int argc, char **argv){
-    bzero( &self_addr,sizeof(self_addr));
-    self_addr.sin_family = AF_INET;
-	self_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	self_addr.sin_port = htons(atoi(argv[1]));
 	bindolocaleTCP(&socketto,argv[1]);
 	pthread_t thread;
     struct thread_data dati;
@@ -134,9 +131,10 @@ bool trybind(int argc, char **argv){
     }
     char line[999];
     while (fgets(line,999,stdin) != NULL){
-        printf("\nsended from %s:%d the following: %s\n",
-	    inet_ntoa(self_addr.sin_addr), ntohs(self_addr.sin_port), line );
-        send(dati.socketfd,line,strlen(line),0);
+                if(strncmp(line,"quit",2)==0){close(dati.socketfd);printf("chat chiusa\n");return;}
+                printf("\t sended to %s:%d\n",
+                inet_ntoa(dati.rem_addr.sin_addr), ntohs(dati.rem_addr.sin_port) );
+                send(dati.socketfd,line,strlen(line),0);
    }
 	return true;
 }
@@ -148,7 +146,7 @@ void parse_args_addr(int argc, char **argv) {
     }
     bool connesso=tryconnect(argc,argv);
     if(connesso==true){
-        printf("connesso a %s : %i \n",argv[2],atoi(argv[1]));
+        printf("connesso a %s : %s \n",argv[1],argv[2]);
         struct thread_data dati;
         dati.socketfd=socketto;
         dati.rem_addr=remot_addr;
