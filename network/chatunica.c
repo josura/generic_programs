@@ -34,6 +34,7 @@ void *ReceivingMessage(void *threadid){
         int n = recv(tid->socketfd,buff,SIZE-1,0);
         if(n==0) continue;
         buff[n] = 0;
+	 if(strlen(buff)==0)continue;
         printf("\nPid=%d: received from %s:%d \n the message: %s\n",getpid(),inet_ntoa(tid->rem_addr.sin_addr), ntohs(tid->rem_addr.sin_port), buff );
     }
     pthread_exit(NULL);
