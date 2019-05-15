@@ -22,6 +22,10 @@ struct thread_data{
 int socketto;
 struct sockaddr_in self_addr,remot_addr;
 
+void errore(){
+    printf("errore %s \n",strerror(errno));     //si puo usare perror ma chissa se funziona
+}
+
 void *ReceivingMessage(void *threadid){
     struct thread_data* tid = (struct thread_data*)threadid;   //non li sto usando ma per usarli li posso passare in questo modo
     char buff[SIZE];
@@ -35,7 +39,7 @@ void *ReceivingMessage(void *threadid){
     pthread_exit(NULL);
  }
 
-void bindolocaleTCP(int* sockfd,int porta){
+void bindolocaleTCP(int* sockfd,char* porta){
     struct addrinfo hints,*res,* rp;
     bzero(&hints,sizeof(struct addrinfo));
     hints.ai_family=AF_INET;
@@ -79,7 +83,7 @@ bool tryconnect(int argc, char **argv){
     tim.tv_usec=1;
     self_addr.sin_family = AF_INET;
 	self_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	self_addr.sin_port = htons(argv[2]);
+	self_addr.sin_port = htons(atoi(argv[2]));
     for (rp = res; rp != NULL; rp = rp->ai_next) {
                socketto = socket(rp->ai_family, rp->ai_socktype,
                             rp->ai_protocol);
@@ -109,7 +113,7 @@ bool trybind(int argc, char **argv){
     self_addr.sin_family = AF_INET;
 	self_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	self_addr.sin_port = htons(atoi(argv[1]));
-	bindolocaleTCP(&socketto,atoi(argv[1]));
+	bindolocaleTCP(&socketto,argv[1]);
 	pthread_t thread;
     struct thread_data dati;
     if ((listen(socketto,5)) != 0) {
@@ -120,7 +124,7 @@ bool trybind(int argc, char **argv){
     else
         printf("Server listening..\n");
     int len = sizeof(remot_addr);
-    dati.socketfd=accept(socketto,&remot_addr,len);
+    dati.socketfd=accept(socketto,(struct sockaddr*)&remot_addr,&len);
     dati.rem_addr=remot_addr;
     int rc = pthread_create(&thread, NULL, ReceivingMessage, &dati);
     if (rc){
@@ -153,11 +157,11 @@ void parse_args_addr(int argc, char **argv) {
             if (rc){
                 printf("ERROR; return code from pthread_create() is %d\n", rc);
                 errore();
-                return 0;
+                return;
             }
             char line[999];
             while (fgets(line,999,stdin) != NULL){
-                if(strncmp(line,"quit",2)==0){close(dati.socketfd);printf("chat chiusa\n");return 0;}
+                if(strncmp(line,"quit",2)==0){close(dati.socketfd);printf("chat chiusa\n");return;}
                 printf("\t sended to %s:%d\n",
                 inet_ntoa(dati.rem_addr.sin_addr), ntohs(dati.rem_addr.sin_port) );
                 send(dati.socketfd,line,strlen(line),0);
@@ -171,9 +175,7 @@ void parse_args_addr(int argc, char **argv) {
 
 }
 
-void errore(){
-    printf("errore %s \n",strerror(errno));     //si puo usare perror ma chissa se funziona
-}
+
 
 
 
