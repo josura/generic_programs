@@ -35,6 +35,7 @@ void *ReceivingMessage(void *threadid){
         if(n==0) continue;
         buff[n] = 0;
 	 if(strlen(buff)==0)continue;
+	 if(strncmp(buff,"quit",2)==0){close(tid.socketfd);printf("chat chiusa\n");return;}
         printf("\nPid=%d: received from %s:%d \n the message: %s\n",getpid(),inet_ntoa(tid->rem_addr.sin_addr), ntohs(tid->rem_addr.sin_port), buff );
     }
     pthread_exit(NULL);
