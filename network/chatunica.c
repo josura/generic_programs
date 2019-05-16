@@ -38,7 +38,7 @@ void *ReceivingMessage(void *threadid){
         printf("\nPid=%d: received from %s:%d \n the message: %s\n",getpid(),inet_ntoa(tid->rem_addr.sin_addr), ntohs(tid->rem_addr.sin_port), buff );
     }
     pthread_exit(NULL);
- }
+}
 
 void bindolocaleTCP(int* sockfd,char* porta){
     struct addrinfo hints,*res,* rp;
@@ -113,29 +113,29 @@ bool tryconnect(int argc, char **argv){
 bool trybind(int argc, char **argv){
 	bindolocaleTCP(&socketto,argv[1]);
 	pthread_t thread;
-    struct thread_data dati;
-    if ((listen(socketto,5)) != 0) {
-        printf("Listen failed...\n");
-        errore();
-        exit(1);
-    }
-    else
-        printf("Server listening..\n");
-    int len = sizeof(remot_addr);
-    dati.socketfd=accept(socketto,(struct sockaddr*)&remot_addr,&len);
-    dati.rem_addr=remot_addr;
-    int rc = pthread_create(&thread, NULL, ReceivingMessage, &dati);
-    if (rc){
-        printf("ERROR; return code from pthread_create() is %d\n", rc);
-        return 0;
-    }
-    char line[999];
-    while (fgets(line,999,stdin) != NULL){
+    	struct thread_data dati;
+    	if ((listen(socketto,5)) != 0) {
+        	printf("Listen failed...\n");
+        	errore();
+        	exit(1);
+    	}
+    	else
+        	printf("Server listening..\n");
+    	int len = sizeof(remot_addr);
+    	dati.socketfd=accept(socketto,(struct sockaddr*)&remot_addr,&len);
+    	dati.rem_addr=remot_addr;
+    	int rc = pthread_create(&thread, NULL, ReceivingMessage, &dati);
+    	if (rc){
+        	printf("ERROR; return code from pthread_create() is %d\n", rc);
+        	return 0;
+    	}
+    	char line[999];
+    	while (fgets(line,999,stdin) != NULL){
                 if(strncmp(line,"quit",2)==0){close(dati.socketfd);printf("chat chiusa\n");return;}
                 printf("\t sended to %s:%d\n",
                 inet_ntoa(dati.rem_addr.sin_addr), ntohs(dati.rem_addr.sin_port) );
                 send(dati.socketfd,line,strlen(line),0);
-   }
+   	}
 	return true;
 }
 
@@ -150,7 +150,6 @@ void parse_args_addr(int argc, char **argv) {
         struct thread_data dati;
         dati.socketfd=socketto;
         dati.rem_addr=remot_addr;
-            struct sockaddr_in persona;
             pthread_t threadRec;
             int rc=pthread_create(&threadRec, NULL, ReceivingMessage,&dati);
             if (rc){
@@ -173,11 +172,6 @@ void parse_args_addr(int argc, char **argv) {
     }
 
 }
-
-
-
-
-
 
 
 int main(int argc, char **argv){
