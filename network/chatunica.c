@@ -28,15 +28,17 @@ void errore(){
 
 void *ReceivingMessage(void *threadid){
     struct thread_data* tid = (struct thread_data*)threadid;   //non li sto usando ma per usarli li posso passare in questo modo
-    char buff[SIZE];
+    char buff[SIZE],prec[SIZE];
     bzero(buff,SIZE);
     while(1){
         int n = recv(tid->socketfd,buff,SIZE-1,0);
         if(n==0) continue;
         buff[n] = 0;
 	 if(strlen(buff)==0)continue;
+	    if(strncmp(buff,prec,SIZE-2)==0)continue;
 	 if(strncmp(buff,"quit",2)==0){close(tid.socketfd);printf("chat chiusa\n");return;}
         printf("\nPid=%d: received from %s:%d \n the message: %s\n",getpid(),inet_ntoa(tid->rem_addr.sin_addr), ntohs(tid->rem_addr.sin_port), buff );
+    	strcpy(prec,buff);
     }
     pthread_exit(NULL);
 }
@@ -135,6 +137,7 @@ bool trybind(int argc, char **argv){
                 if(strncmp(line,"quit",2)==0){close(dati.socketfd);printf("chat chiusa\n");return;}
                 printf("\t sended to %s:%d\n",
                 inet_ntoa(dati.rem_addr.sin_addr), ntohs(dati.rem_addr.sin_port) );
+		if(strlen(line)==0)continue;
                 send(dati.socketfd,line,strlen(line),0);
    	}
 	return true;
