@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1558437542 source:/home/giorgio/Desktop/laboratorio_sistemi_op/provadebugger/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1558607995 source:/home/giorgio/Desktop/laboratorio_sistemi_op/provadebugger/esempioPID1.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1558608986 source:/home/giorgio/Desktop/laboratorio_sistemi_op/provadebugger/forkbomb.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+

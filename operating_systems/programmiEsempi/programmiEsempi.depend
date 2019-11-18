@@ -1,0 +1,294 @@
+# depslib dependency file v1.0
+1556796192 source:/home/giorgio/Desktop/laboratorio_sistemi_op/cat.c
+	<stdio.h>
+	<stdlib.h>
+
+1560442170 source:/home/giorgio/Desktop/laboratorio_sistemi_op/concfixed.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/ipc.h>
+	<sys/sem.h>
+	<sys/shm.h>
+	<sys/wait.h>
+	<unistd.h>
+
+1560442117 source:/home/giorgio/Desktop/laboratorio_sistemi_op/concproblem.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/ipc.h>
+	<sys/shm.h>
+	<sys/wait.h>
+	<unistd.h>
+
+1556796233 source:/home/giorgio/Desktop/laboratorio_sistemi_op/copy.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<unistd.h>
+
+1556796203 source:/home/giorgio/Desktop/laboratorio_sistemi_op/copystream.c
+	<stdio.h>
+	<stdlib.h>
+
+1556796259 source:/home/giorgio/Desktop/laboratorio_sistemi_op/count.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<unistd.h>
+
+1556796283 source:/home/giorgio/Desktop/laboratorio_sistemi_op/creat.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+
+1560441968 source:/home/giorgio/Desktop/laboratorio_sistemi_op/exec.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1560441968 source:/home/giorgio/Desktop/laboratorio_sistemi_op/exec2.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<string.h>
+
+1560442016 source:/home/giorgio/Desktop/laboratorio_sistemi_op/fifo.c
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<unistd.h>
+
+1560442016 source:/home/giorgio/Desktop/laboratorio_sistemi_op/fifo2.c
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<unistd.h>
+
+1558614613 source:/home/giorgio/Desktop/laboratorio_sistemi_op/fork.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1558614613 source:/home/giorgio/Desktop/laboratorio_sistemi_op/fork2.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1558614613 source:/home/giorgio/Desktop/laboratorio_sistemi_op/fork3.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1560441896 source:/home/giorgio/Desktop/laboratorio_sistemi_op/forkwait.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<sys/wait.h>
+
+1558614542 source:/home/giorgio/Desktop/laboratorio_sistemi_op/mmapcopy.c
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/mman.h>
+	<sys/stat.h>
+	<unistd.h>
+
+1558614542 source:/home/giorgio/Desktop/laboratorio_sistemi_op/mmapdouble.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<sys/mman.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+
+1558614542 source:/home/giorgio/Desktop/laboratorio_sistemi_op/mmapread.c
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<sys/mman.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<unistd.h>
+
+1558614542 source:/home/giorgio/Desktop/laboratorio_sistemi_op/mmapreverse.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<sys/mman.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<unistd.h>
+
+1558121908 source:/home/giorgio/Desktop/laboratorio_sistemi_op/move.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1560442053 source:/home/giorgio/Desktop/laboratorio_sistemi_op/msgcreate.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/ipc.h>
+	<sys/msg.h>
+	<unistd.h>
+
+1560442053 source:/home/giorgio/Desktop/laboratorio_sistemi_op/msgreceive.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/ipc.h>
+	<sys/msg.h>
+
+1560442053 source:/home/giorgio/Desktop/laboratorio_sistemi_op/msgsend.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/ipc.h>
+	<sys/msg.h>
+
+1560442053 source:/home/giorgio/Desktop/laboratorio_sistemi_op/msgtext.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/ipc.h>
+	<sys/msg.h>
+	<unistd.h>
+	<sys/wait.h>
+
+1558614613 source:/home/giorgio/Desktop/laboratorio_sistemi_op/multifork.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1560441896 source:/home/giorgio/Desktop/laboratorio_sistemi_op/multiforkwait.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<sys/wait.h>
+
+1560441978 source:/home/giorgio/Desktop/laboratorio_sistemi_op/nanoshell.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/wait.h>
+	<unistd.h>
+
+1560442069 source:/home/giorgio/Desktop/laboratorio_sistemi_op/numprodcons.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/ipc.h>
+	<sys/msg.h>
+	<unistd.h>
+
+1556796268 source:/home/giorgio/Desktop/laboratorio_sistemi_op/openclose.c
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1558614624 source:/home/giorgio/Desktop/laboratorio_sistemi_op/pid.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1560441997 source:/home/giorgio/Desktop/laboratorio_sistemi_op/pipe.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/wait.h>
+	<unistd.h>
+
+1560441997 source:/home/giorgio/Desktop/laboratorio_sistemi_op/pipe2.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<sys/types.h>
+
+1558946528 source:/home/giorgio/Desktop/laboratorio_sistemi_op/printdir.c
+	<stdio.h>
+	<stdlib.h>
+	<dirent.h>
+	<sys/stat.h>
+	<unistd.h>
+	<string.h>
+
+1558436953 source:/home/giorgio/Desktop/laboratorio_sistemi_op/provagdb.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<unistd.h>
+
+1556796244 source:/home/giorgio/Desktop/laboratorio_sistemi_op/read.c
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1556796218 source:/home/giorgio/Desktop/laboratorio_sistemi_op/redirect.c
+	<fcntl.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+
+1560442154 source:/home/giorgio/Desktop/laboratorio_sistemi_op/semtext.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/ipc.h>
+	<sys/shm.h>
+	<sys/sem.h>
+	<sys/wait.h>
+	<unistd.h>
+
+1560442098 source:/home/giorgio/Desktop/laboratorio_sistemi_op/shmnumbers.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/ipc.h>
+	<sys/shm.h>
+	<sys/wait.h>
+	<unistd.h>
+
+1560442098 source:/home/giorgio/Desktop/laboratorio_sistemi_op/shmsemprod2cons.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/ipc.h>
+	<sys/shm.h>
+	<sys/sem.h>
+	<sys/wait.h>
+	<time.h>
+	<unistd.h>
+
+1560442098 source:/home/giorgio/Desktop/laboratorio_sistemi_op/shmsemprodcons.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/ipc.h>
+	<sys/sem.h>
+	<sys/shm.h>
+	<sys/wait.h>
+	<time.h>
+	<unistd.h>
+
+1558946544 source:/home/giorgio/Desktop/laboratorio_sistemi_op/stat.c
+	<stdio.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<pwd.h>
+	<grp.h>
+	<time.h>
+
+1560904018 source:/home/giorgio/Desktop/laboratorio_sistemi_op/programmiEsempi/main.c
+	<stdio.h>
+	<stdlib.h>
+

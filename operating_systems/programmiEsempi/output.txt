@@ -1,0 +1,4 @@
+ciao io sono giorgio
+ora sto scrivendo questo documento con vim in modo da avere un testo esempio
+speriamo che mi funzionino tutte le funzioni
+condanna ai segmentation fault

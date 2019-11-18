@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="programmiEsempi" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/programmiEsempi" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/programmiEsempi" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../cat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../concfixed.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../concproblem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../copy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../copystream.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../count.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../creat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../esempioPID1" />
+		<Unit filename="../exec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../exec2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fifo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fifo2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fork.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fork2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../fork3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../forkwait.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../mmapcopy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../mmapdouble.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../mmapread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../mmapreverse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../move.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../msgcreate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../msgreceive.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../msgsend.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../msgtext.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../multifork.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../multiforkwait.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../nanoshell.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../numprodcons.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../openclose" />
+		<Unit filename="../openclose.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../pid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../pipe.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../pipe2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../printdir.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../provagdb" />
+		<Unit filename="../provagdb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../read.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../redirect.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../semtext.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../shmnumbers.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../shmsemprod2cons.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../shmsemprodcons.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../stat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
