@@ -1,0 +1,8 @@
+﻿Stessa subnet significa che le reti si sovrappongono
+dobbiamo dire ai terminali di comportarsi da router
+et/sysct1 ha flag(è virtuale quindi non estiste veramente)
+per abilitare il routing(forwarding) bisogna mettere net.ipv4.conf.ip_forward=1
+con lo script possiamo configurare la rete evitando molti disagi
+se sbagliamo la maschera ci saranno certi indirizzi che non potremo vedere, ma dentro la lan dovremo vedere gli indirizzi e useremo ARP
+nella tabella di routing, salviamo indirizzi esterni con l’indirizzo di router
+con la fork il padre è la shell stessa(chiamata iniziale) allora quando finisce si ritorna ai comandi della shell
